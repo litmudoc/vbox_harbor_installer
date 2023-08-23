@@ -31,8 +31,7 @@ echo "Housekeeping done"
 
 #Install Latest Stable Docker Release
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg2 gnupg-agent software-properties-common
-curl -o docker.gpg -fsSL https://download.docker.com/linux/ubuntu/gpg
-sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
 rm docker.gpg
 sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq

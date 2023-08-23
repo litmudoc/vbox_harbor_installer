@@ -30,7 +30,7 @@ sudo sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 echo "Housekeeping done"
 
 #Install Latest Stable Docker Release
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg2 gnupg-agent software-properties-common
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
 sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq

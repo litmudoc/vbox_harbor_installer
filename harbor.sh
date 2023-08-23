@@ -23,18 +23,18 @@ if [ -z "$IPorFQDN" ];then
 fi
 
 # Housekeeping
-sudo apt update -yq
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -yq
 sudo swapoff --all
 sudo sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 #ufw disable #Do Not Do This In Production
 echo "Housekeeping done"
 
 #Install Latest Stable Docker Release
-sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update -yqq
-sudo apt-get install -y docker-ce docker-ce-cli docker-compose-plugin
+sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -yqq
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker-ce docker-ce-cli docker-compose-plugin
 sudo tee /etc/docker/daemon.json >/dev/null <<EOF
 {
 	"exec-opts": ["native.cgroupdriver=systemd"],
